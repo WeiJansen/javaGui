@@ -55,7 +55,7 @@ public class MsgFrame extends JFrame implements ActionListener {
         // 设置添加搜索按钮
         SearchButton searchButton = new SearchButton(this);
         searchButton.setBounds(20,5,60, 20);
-        toolsPanel.setBorder(new LineBorder(Color.CYAN));
+        toolsPanel.setBorder(new LineBorder(Color.black));
         toolsPanel.add(searchButton);
 
 
@@ -68,14 +68,10 @@ public class MsgFrame extends JFrame implements ActionListener {
     private void setNetWorkPanel() {
         JScrollPane netWorkPanel = new JScrollPane();
         netWorkPanel.setBounds(10, 40, 200, 680);
-        netWorkPanel.setBorder(new LineBorder(Color.CYAN));
+        netWorkPanel.setBorder(new LineBorder(Color.black));
         //设置网络列表
-
-        DefaultListModel<String> ipList = new DefaultListModel<>();
-        for (int i= 0; i < 100; i++) {
-            ipList.addElement("测试"+ i);
-        }
-
+        ipList = new DefaultListModel<>();
+        HandleListener.setNetWorkData(ipList);
 
         JList<String> netWorkModelJList = new JList<>(ipList);
         netWorkPanel.setViewportView(netWorkModelJList);
@@ -85,6 +81,16 @@ public class MsgFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String actionCommand = e.getActionCommand();
+        switch (actionCommand) {
+            // 刷新获取所有的ip
+            case "gtAll":
+                HandleListener.getAllIP(ipList);
+                break;
+            case "":
+                break;
 
+
+        }
     }
 }
